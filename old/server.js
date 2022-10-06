@@ -1,10 +1,10 @@
 const User = {
-    passNum: 12345678,
-    issi: 54321,
+    passNum: 91120173,
+    issi: 012345,
     registered: false,
     socket: null
 }
-Register = require('./register.js');
+const Register = require('../util/register.js');
 const KaitaiStream = require('kaitai-struct/KaitaiStream');
 
 // const parsedReg = new Register(new KaitaiStream(buff))
@@ -14,7 +14,7 @@ const KaitaiStream = require('kaitai-struct/KaitaiStream');
 const net = require('net');
 
 
-const register = require('./register.js');
+const register = require('../util/register.js');
 
 var server = net.createServer(function(socket) {
     socket.setEncoding('binary');

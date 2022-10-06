@@ -1,33 +1,36 @@
 const net = require('net');
-const RegResponse = require('./reg_response.js');
-const LipParser = require('./lip_parser.js');
+const RegResponse = require('../util/reg_response.js');
+const LipParser = require('../util/lip_parser.js');
 const KaitaiStream = require('kaitai-struct/KaitaiStream');
 
-const PASSOWRD = 12345678
-const ISSI = 54321
+const PASSOWRD = 0x91120173
+const ISSI = 0x012345
 const SERVER = '127.0.0.1'
-const PORT = 3337
+const PORT = 6006
 
 let registered = false
 
 
 const writeUInt24BE = (val,buff,pos) =>{
     buff.writeInt16BE(val >> 8, pos + 0)
-    buff.writeInt8(val & 255, pos + 2)
+    buff.writeUInt8(val & 255, pos + 2)
 }
 
 const client = new net.Socket();
 client.connect(PORT, SERVER, function() {
-    
+    const SendRegistration = ()=>{
+        buff = new Buffer.alloc(11)
+        buff.writeUInt16BE(08,0)
+        buff.writeUInt8(02,2)
+        buff.writeUInt32BE(PASSOWRD,3)
+        writeUInt24BE(ISSI,buff,7)
+        buff.writeUInt8(0,10)
+        client.write(buff);
+    }
     console.log('Connected');
     client.setEncoding('binary')
     // Registering
-    buff = new Buffer.alloc(9)
-    buff.writeUInt8(02,0)
-    buff.writeUInt32BE(PASSOWRD,1)
-    writeUInt24BE(ISSI,buff,5)
-    buff.writeUInt8(0,8)
-    client.write(buff);
+    SendRegistration()
 });
 
 client.on('data', function(data) {
