@@ -15,7 +15,8 @@ class Client extends EventEmitter {
       this.emit('message',data)
     })
     this.client.on('error', function (err) {
-      console.log('Error:'+err)
+      log("tetra_client:error", "error", err)
+      process.exit(1);
       this.emit('error', err)
     })
     this.client.on('close', function () {
@@ -52,14 +53,9 @@ class Client extends EventEmitter {
     this.issi = issi
     this.client.connect(port, host, function() {
       log("tetra_client:connect", "info",'Conectat la routerul SM')
-  });
-    
-    
+    });    
   }
 
-  close () {
-    
-  }
 
   writeToServer (buff) {
     this.client.write(buff);
