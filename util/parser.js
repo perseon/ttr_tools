@@ -44,7 +44,6 @@ class Parser{
     }
 
     lipData(data){
-        console.log(data)
         let adaptation  = data.readUInt16BE(0)
         if(data.length !==adaptation+2)
         { 

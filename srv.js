@@ -34,11 +34,12 @@ srv.on('message',(data)=>{
     }
   
     //simulam indisponibilitatea
-    if(Math.random()<0){
+    if(Math.random()<.7){
         buff = new Response(data,0x03) 
     } else{
         isRegistered = true
         buff = new Response(data,0) 
+        console.log('aplicatie inregistrata')
     }
     srv.socket.write(buff)
 })
