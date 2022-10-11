@@ -16,8 +16,8 @@ class Client extends EventEmitter {
     })
     this.client.on('error', function (err) {
       log("tetra_client:error", "error", err)
-      process.exit(1);
       this.emit('error', err)
+      process.exit(1);
     })
     this.client.on('close', function () {
       this.emit('close')

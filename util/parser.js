@@ -50,8 +50,15 @@ class Parser{
             this.error = 'Lungime invalida'
             return
         }
-        const l = new LipParser(new KaitaiStream(data.subarray(2)))
+        const l = new LipParser(new KaitaiStream(data))
         console.table({
+            sourceIssi:l.sourceIssi,
+            destinationIssi:l.destinationIssi,
+            protocol:l.protocol,
+            sdsType:l.sdsType,
+            ss:l.ss,
+            msgReference:l.msgReference,
+            areaSelection:l.areaSelection,
             pduType:l.pduType,
             timeElapsed:l.timeElapsed,
             longitude:l.longitude,

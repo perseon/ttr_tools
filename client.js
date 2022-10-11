@@ -1,6 +1,5 @@
+'use strict'
 require('dotenv').config()
-const Register = require('./srv/register')
-const Response = require('./srv/response')
 const Parser = require('./util/parser')
 const Client = require('./tetra_client')
 
